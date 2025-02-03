@@ -1,0 +1,78 @@
+/* 🔥 Improved Card Styling */
+.box {
+    width: 350px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, #f0f4ff, #dfe7fd);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    overflow: hidden;
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    padding: 20px;
+    text-align: center;
+}
+
+.box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.18);
+}
+
+/* 🔹 Title */
+.contentHeader h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #2b2b2b;
+    margin-bottom: 12px;
+}
+
+/* 🔗 Links */
+.linksContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+.linkStyle {
+    color: #4a63ee;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.3s ease-in-out;
+}
+
+.linkStyle:hover {
+    color: #2a45d0;
+    text-decoration: underline;
+}
+
+/* 📝 Description */
+.contentHolder {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+    padding: 10px 0;
+}
+
+/* 🟦 Call-to-Action Button */
+.buttonHolder {
+    margin-top: 16px;
+}
+
+.buttonStyle {
+    background: linear-gradient(45deg, #4a63ee, #89b4fa);
+    padding: 12px 20px;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+.buttonStyle:hover {
+    background: linear-gradient(45deg, #89b4fa, #4a63ee);
+    transform: scale(1.05);
+}
+
+.buttonStyle:active {
+    transform: scale(0.95);
+}

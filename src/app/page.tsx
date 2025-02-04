@@ -47,13 +47,12 @@ export default function Home() {
   // Scroll progress bar logic
   useEffect(() => {
     const handleScroll = () => {
-      const scrollIndicator = document.querySelector(`.${styles.scrollIndicator}`);
+      const scrollIndicator = document.querySelector(`.${styles.scrollIndicator}`) as HTMLElement | null;
       const scrollTop = document.documentElement.scrollTop;
       const scrollHeight =
         document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const scrolled = (scrollTop / scrollHeight) * 100;
       if (scrollIndicator != null) {
-        // @ts-ignore
         scrollIndicator.style.width = `${scrolled}%`;
       }
     };

@@ -8,6 +8,7 @@ type CardContent = {
         href: string;
         name:string;
     }[]; 
+    whatsapp: string;
 };
 
 type Props = {
@@ -45,7 +46,7 @@ const Card = ({ data }: Props) => {
 
             {/* CTA Button */}
             <div className={styles.buttonHolder}>
-                <button className={styles.buttonStyle}>Enquire Now!</button>
+                <a href={data.whatsapp} className={styles.buttonStyle}>Enquire Now!</a>
             </div>
         </div>
     );

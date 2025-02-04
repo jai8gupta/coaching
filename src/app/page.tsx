@@ -12,7 +12,8 @@ const data = [
       <li>Database Integration - Learn to integrate and manage databases like MongoDB and PostgreSQL to build full-stack applications.</li>
       <li>Deployment and CI/CD - Deploy web apps to cloud platforms (AWS, Vercel) and automate workflows with CI/CD pipelines.</li>
     </ul>`,
-    links: [{href:"http://localhost:3000/", name:"AI-Clone" },  {href:"http://localhost:3000/", name:"AI-Clone" }]
+    links: [{href:"https://youtube-ai-agent-six.vercel.app/", name:"ChatGPT AI-Clone" },  {href:"https://sass-translator.vercel.app/", name:"A Prototype Translater Web App" }, {href: "https://www.dropbox-clone.online/", name: "Dropbox clone"}],
+    whatsapp: `https://wa.me/${process.env.NEXT_PUBLIC_PHONE_NUMBER}?text=I'm%20interested%20in%20Full-Stack%20Web%20Development`
   },
   {
     title: "Android and iOS Development",
@@ -22,7 +23,8 @@ const data = [
       <li>Bridging React Native with Native Code - Extend React Native apps by integrating Kotlin and Swift for platform-specific features.</li>
       <li>End-to-End Mobile App Deployment - Learn the app development lifecycle from design to deployment on Google Play and the App Store.</li>
     </ul>`,
-    links: [{href:"http://localhost:3000/", name:"AI-Clone" },  {href:"http://localhost:3000/", name:"AI-Clone" }]
+    links: [{href:"https://github.com/jai8gupta/coaching/releases/download/musicapp/app-release.apk", name:"Music App" },  {href:"https://github.com/jai8gupta/coaching/releases/download/racinggame/app-debug.apk", name:"A Prototype Retro Racing Game Kotlin Based" }],
+    whatsapp: `https://wa.me/${process.env.NEXT_PUBLIC_PHONE_NUMBER}?text=I'm%20interested%20in%20Android%20and%20iOS%20Development`
 
   },
   {
@@ -31,7 +33,8 @@ const data = [
       <li>Core Java Programming - Master object-oriented programming concepts, data structures, and algorithms using Java.</li>
       <li>Building RESTful APIs - Learn to develop scalable APIs and web services using Spring Boot.</li>
      </ul>`,
-     links: []
+     links: [],
+     whatsapp: `https://wa.me/${process.env.NEXT_PUBLIC_PHONE_NUMBER}?text=I'm%20interested%20in%20Java%20Development`
   }
 ];
 
@@ -78,21 +81,13 @@ export default function Home() {
         ))}
       </div>
 
-      {/* Testimonials */}
-      {/* <div className={styles.testimonialHolder}>
-        <h2>What Our Students Say</h2>
-        <p>
-          "This platform transformed the way I learn Android and iOS development!" - Jane Doe
-        </p>
-      </div> */}
 
       {/* Footer */}
       <footer className={styles.footer}>
         <p>© 2024 The Prototype Studio | All Rights Reserved</p>
-        <div className="social-icons">
-          <a href="#">Twitter</a>
-          <a href="#">LinkedIn</a>
-          <a href="#">GitHub</a>
+        <div className={styles["social-icons"]}>
+          <a href="https://www.linkedin.com/in/jai-gupta-51301b203/">LinkedIn</a>
+          <a href="https://github.com/jai8gupta">GitHub</a>
         </div>
       </footer>
     </main>

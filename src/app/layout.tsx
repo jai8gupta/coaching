@@ -27,9 +27,6 @@ export const metadata: Metadata = {
     description: "Master cutting-edge skills with expert coaching at The Prototype Studio.",
     images: ["https://theprototypestudio.com/twitter-image.jpg"],
   },
-  icons: {
-    icon: { url: '/favicon.ico' },
-  },
 };
 
 export default function RootLayout({

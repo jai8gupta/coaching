@@ -2,6 +2,8 @@
 import React, { useEffect } from "react";
 import styles from "./page.module.css";
 import Card from "@/components/Card";
+import SignInButton from "@/components/SignInButton";
+import { useSession } from "next-auth/react"
 
 const data = [
   {
@@ -45,6 +47,9 @@ const data = [
 
 export default function Home() {
   // Scroll progress bar logic
+  const { data: session } = useSession();
+  console.log("session", session);
+  
   useEffect(() => {
     const handleScroll = () => {
       const scrollIndicator = document.querySelector(`.${styles.scrollIndicator}`) as HTMLElement | null;
@@ -72,23 +77,14 @@ export default function Home() {
         </div>
         <div className={`${styles["electric-line"]}`} />
       </header>
+      <SignInButton />
+      <h1>
+        {session?.user?.email}
+        <br />
+        {session?.user?.id}
+      </h1>
 
-      {/* Cards */}
-      <div className={styles.cardHolder}>
-        {data.map((object, i) => (
-          <Card key={i} data={object} />
-        ))}
-      </div>
-
-
-      {/* Footer */}
-      <footer className={styles.footer}>
-        <p>© 2024 The Prototype Studio | All Rights Reserved</p>
-        <div className={styles["social-icons"]}>
-          <a href="https://www.linkedin.com/in/jai-gupta-51301b203/">LinkedIn</a>
-          <a href="https://github.com/jai8gupta">GitHub</a>
-        </div>
-      </footer>
+      
     </main>
   );
 }

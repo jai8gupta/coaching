@@ -90,10 +90,10 @@ const components: PortableTextReactComponents = {
 
           <div className="space-y-8">
             {/* Lesson Content */}
-            {lesson.description && (
+            {lesson.content && (
               <div>
                 <h2 className="text-xl font-semibold mb-4">Lesson Notes</h2>
-                  <div className="prose prose-blue dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: lesson?.description}} />
+                  <div className="prose prose-blue dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: lesson?.description!}} />
               </div>
             )}
           </div>

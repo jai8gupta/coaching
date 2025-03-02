@@ -14,12 +14,9 @@ export async function POST(req: Request) {
  
 
   const { authId, email, firstName, lastName, imageUrl }: CreateStudentProps = await req.json();
-  try {
-
-    console.log("authId", authId);
-    
+  try {    
     // First, check if the student exists
-   const newStudent = createStudentIfNotExists({ authId, email, firstName, lastName, imageUrl })
+   const newStudent = await createStudentIfNotExists({ authId, email, firstName, lastName, imageUrl })
 
     return Response.json({ message: "New student created", student: newStudent });
   } catch (error) {

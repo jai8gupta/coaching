@@ -6,6 +6,7 @@ interface CoursePageProps {
     courseId: string;
   }>;
 }
+export const revalidate = 60
 
 export default async function CoursePage({ params }: CoursePageProps) {
   const { courseId } = await params;

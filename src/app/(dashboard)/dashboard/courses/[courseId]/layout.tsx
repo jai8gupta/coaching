@@ -4,6 +4,7 @@ import getCourseById from "@/sanity/lib/courses/getCourseById";
 import { auth } from "../../../../../../auth";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import { checkCourseAccess } from "@/lib/checkCourseAuth";
+export const revalidate = 60
 
 interface CourseLayoutProps {
   children: React.ReactNode;

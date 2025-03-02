@@ -4,6 +4,7 @@ import { GraduationCap } from "lucide-react";
 import CourseCard from "@/components/CourseCard";
 import { auth } from "../../../../auth";
 import { getEnrolledCourses } from "@/sanity/lib/student/getEnrolledCourses";
+export const revalidate = 60
 
 export default async function MyCoursesPage() {
   const session = await auth();

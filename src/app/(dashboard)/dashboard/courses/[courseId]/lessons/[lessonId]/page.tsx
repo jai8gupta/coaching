@@ -2,6 +2,7 @@ import { redirect } from "next/navigation";
 import { getLessonById } from "@/sanity/lib/lessons/getLessonById";
 import { PortableText } from "@portabletext/react";
 import { PortableTextReactComponents } from "@portabletext/react";
+export const revalidate = 60
 
 interface LessonPageProps {
   params: Promise<{
@@ -93,7 +94,7 @@ const components: PortableTextReactComponents = {
             {lesson.content && (
               <div>
                 <h2 className="text-xl font-semibold mb-4">Lesson Notes</h2>
-                  <div className="prose prose-blue dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: lesson?.description!}} />
+                  <div className="prose prose-blue dark:prose-invert max-w-none" dangerouslySetInnerHTML={{ __html: lesson?.content!}} />
               </div>
             )}
           </div>

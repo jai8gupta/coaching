@@ -1,33 +1,17 @@
-import type { Metadata } from "next";
-import "./globals.css"
+import { Geist, Geist_Mono } from "next/font/google";
+import "./globals.css";
+import { ThemeProvider } from "@/components/theme-provider";
 
-export const metadata: Metadata = {
-  title: "The Prototype Studio - Learn, Innovate, Succeed",
-  description: "Empowering learners with hands-on coaching in tech, design, and innovation.",
-  keywords: "coaching, tech coaching, design learning, innovation, The Prototype Studio, skill development",
-  authors: [{name: "The Prototype Studio"}],
-  openGraph: {
-    title: "The Prototype Studio - Learn, Innovate, Succeed",
-    description: "Join The Prototype Studio to master technology, design, and innovation with expert coaching.",
-    url: "https://theprototypestudio.com",
-    siteName: "The Prototype Studio",
-    images: [
-      {
-        url: "/logo.webp",
-        width: 1200,
-        height: 630,
-        alt: "The Prototype Studio Logo",
-      },
-    ],
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "The Prototype Studio - Learn, Innovate, Succeed",
-    description: "Master cutting-edge skills with expert coaching at The Prototype Studio.",
-    images: ["https://theprototypestudio.com/twitter-image.jpg"],
-  },
-};
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
+
 
 export default function RootLayout({
   children,
@@ -35,9 +19,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning >
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+      >
+        <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
         {children}
+          </ThemeProvider>
       </body>
     </html>
   );

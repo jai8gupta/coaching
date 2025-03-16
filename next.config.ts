@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
         protocol: "https"
       }
     ]
+  },
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production'
   }
 };
 

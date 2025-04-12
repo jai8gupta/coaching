@@ -79,7 +79,6 @@ async function createStudentOnClient(authId: string, email: string, firstName?: 
       });
   
       const data = await response.json();
-      console.log("Student response:", data);
       return data;
     } catch (error) {
       console.error("Error creating student:", error);

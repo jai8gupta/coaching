@@ -7,11 +7,12 @@ import CTADrawer from './CTADrawer';
 
 interface Props {
     courseId: string;
-    isEnrolled: boolean
+    isEnrolled: boolean;
+    price: number
 }
 
 const EnrollButton = (props: Props) => {
-    const { courseId, isEnrolled} = props;
+    const { courseId, isEnrolled, price} = props;
     const { data: session, status } = useSession();
     const [isPending, startTransition] = useTransition();
    
@@ -24,7 +25,7 @@ const EnrollButton = (props: Props) => {
         );
       }
 
-    if (isEnrolled) {
+    if (isEnrolled || Number(price) === 0) {
         return (
           <Link
             prefetch={false}

@@ -15,12 +15,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
   const { courseId, lessonId } = await params;
 
   const lesson = await getLessonById(lessonId);
-    console.log("lesson", lesson);
     
   if (!lesson) {
     return redirect(`/dashboard/courses/${courseId}`);
   }
-  console.log("lesson.description is", lesson.description);
 
 const components: PortableTextReactComponents = {
   types: {

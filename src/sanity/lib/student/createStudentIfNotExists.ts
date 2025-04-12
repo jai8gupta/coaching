@@ -24,7 +24,6 @@ export async function createStudentIfNotExists({
   });
 
   if (existingStudentQuery.data) {
-    console.log("Student already exists", existingStudentQuery.data);
     return existingStudentQuery.data;
   }
 
@@ -37,8 +36,6 @@ export async function createStudentIfNotExists({
     lastName,
     imageUrl,
   });
-
-  console.log("New student created", newStudent);
 
   return newStudent;
 }

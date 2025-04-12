@@ -19,7 +19,6 @@ export default async function CourseLayout({
 }: CourseLayoutProps) {
   const session = await auth();
   const { courseId } = await params;
-console.log("session is", session);
 
   if (!session?.user?.id) {
     return redirect("/");

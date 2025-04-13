@@ -24,10 +24,10 @@ export default async function CourseLayout({
     return redirect("/");
   }
 
-  const authResult = await checkCourseAccess(session?.user?.id || null, courseId);
-  if (!authResult.isAuthorized || !session?.user?.id) {
-    return redirect(authResult.redirect!);
-  }
+  // const authResult = await checkCourseAccess(session?.user?.id || null, courseId);
+  // if (!authResult.isAuthorized || !session?.user?.id) {
+  //   return redirect(authResult.redirect!);
+  // }
 
   const course = await getCourseById(courseId);
 

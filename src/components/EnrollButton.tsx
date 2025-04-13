@@ -4,6 +4,7 @@ import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import React, { useTransition } from 'react'
 import CTADrawer from './CTADrawer';
+import { signIn } from "next-auth/react"
 
 interface Props {
     courseId: string;
@@ -23,6 +24,24 @@ const EnrollButton = (props: Props) => {
             <div className="w-5 h-5 border-2 border-gray-400 border-t-gray-600 rounded-full animate-spin" />
           </div>
         );
+      }
+    
+      if(!session?.user?.id){
+        return <>
+        <span
+        onClick={() => signIn("google")}
+            className={`w-full rounded-lg px-6 py-3 font-medium transition-all duration-300 ease-in-out relative h-12
+            ${isPending || !session?.user?.id
+                    ? "bg-gray-100 text-black cursor-pointer  hover:scale-100"
+                    : "bg-white text-black hover:scale-105 hover:shadow-lg hover:shadow-black/10"
+                }
+        `}
+        >
+          <span className={`${isPending ? "opacity-0" : "opacity-100"}`}>
+              Sign in to Enroll For Free
+          </span>
+        </span>
+        </>
       }
 
     if (isEnrolled || Number(price) === 0) {

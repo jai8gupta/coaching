@@ -12,7 +12,7 @@ export default function UsertLayout({
       <SessionProvider>
         <div className="min-h-screen flex flex-col">
           <Header />
-          <main className="flex-1">
+          <main className="flex-1 mt-96 lg:mt-0 md:mt-0">
             {children}
           </main>
         </div>

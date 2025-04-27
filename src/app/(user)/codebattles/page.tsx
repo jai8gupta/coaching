@@ -12,7 +12,7 @@ export default async function CodeBattlesPage() {
       {/* Hero Section */}
       <div className="text-center mb-12">
         <h1 className="text-5xl font-extrabold bg-gradient-to-r from-primary/90 to-[#00FFFF] bg-clip-text text-transparent">
-          Code Battles
+          Code Battles (Please be Signed In to Participate)
         </h1>
         <p className="mt-4 text-muted-foreground text-lg">
           Compete. Learn. Win. Real-time coding quizzes with real cash rewards!
@@ -115,12 +115,25 @@ export default async function CodeBattlesPage() {
               </div>
 
               {/* CTA */}
-              <Link
-                href={`/codebattles/${battle.id}`}
-                className="inline-block mt-4 px-4 py-2 bg-[#00FFFF] text-black rounded-full text-sm font-semibold hover:brightness-110 transition"
-              >
-                Join Battle
-              </Link>
+              {(()=> {
+                const isLive = new Date(battle.dateISO) <= new Date();
+                return isLive ? (
+                <Link
+                  href={`/codebattles/${battle.id}`}
+                  className="inline-block mt-4 px-4 py-2 bg-[#00FFFF] text-black rounded-full text-sm font-semibold hover:brightness-110 transition"
+                >
+                  Join Battle
+                </Link>
+
+                ) : (
+                  <Link
+                  href={`/codebattles`}
+                  className="inline-block mt-4 px-4 py-2 bg-[#00FFFF] text-black rounded-full text-sm font-semibold hover:brightness-110 transition"
+                >
+                  Upcoming
+                </Link>
+                )
+              })()}
             </div>
           </div>
         ))}

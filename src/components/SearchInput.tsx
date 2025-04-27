@@ -6,7 +6,7 @@ const SearchInput = () => {
     return (
         <Form
         action="/search"
-        className='relative w-full flex-1 max-w-[300px]'> 
+        className='absolute w-full flex-1 max-w-[380px] lg:max-w-screen-2xl'> 
              <input 
              type="text" 
              name='term'
@@ -18,4 +18,4 @@ const SearchInput = () => {
     )
 }
 
-export default SearchInput
+export default SearchInput;

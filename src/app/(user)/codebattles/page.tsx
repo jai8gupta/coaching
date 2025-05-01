@@ -37,12 +37,12 @@ export default async function CodeBattlesPage() {
           </p>
           <p className="text-muted-foreground leading-relaxed italic">
             Please stay alert and avoid sharing sensitive information. If you encounter any
-            suspicious messages or activities claiming to be from us, report them immediately at 
-          <span className="font-semibold text-primary ml-1">
+            suspicious messages or activities claiming to be from us, report them immediately at
+            <span className="font-semibold text-primary ml-1">
               theprototypestudio4@gmail.com
             </span>
           </p>
-            <br />
+          <br />
           Good Luck!!
         </div>
       </div>
@@ -55,7 +55,7 @@ export default async function CodeBattlesPage() {
             className="bg-card border border-border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition"
           >
             {(() => {
-              const isLive = new Date(battle.dateISO) <= new Date();
+              const isLive = new Date(battle.dateISO).getTime() >= Date.now();
               const status = isLive ? "Live" : "Coming Soon";
               return (
                 <span
@@ -102,6 +102,15 @@ export default async function CodeBattlesPage() {
               <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
                 <span className="flex items-center gap-1">
                   <Flame className="h-4 w-4" />
+                  {new Intl.DateTimeFormat('en-US', {
+                    hour: 'numeric',
+                    minute: 'numeric',
+                    hour12: true,
+                    timeZone: 'UTC',
+                  }).format(new Date(battle.dateISO))}
+                </span>
+                <span className="flex items-center gap-1">
+                  <Flame className="h-4 w-4" />
                   {battle.level}
                 </span>
                 <span className="flex items-center gap-1">
@@ -115,25 +124,23 @@ export default async function CodeBattlesPage() {
               </div>
 
               {/* CTA */}
-              {(()=> {
-                const isLive = new Date(battle.dateISO) <= new Date();
-                console.log("isLive", isLive);
-                
-                return true ? (
-                <Link
-                  href={`/codebattles/${battle.id}`}
-                  className="inline-block mt-4 px-4 py-2 bg-[#00FFFF] text-black rounded-full text-sm font-semibold hover:brightness-110 transition"
-                >
-                  Join Battle
-                </Link>
+              {(() => {
+                const isLive = new Date(battle.dateISO).getTime() >= Date.now();
+                return isLive ? (
+                  <Link
+                    href={`/codebattles/${battle.id}`}
+                    className="inline-block mt-4 px-4 py-2 bg-[#00FFFF] text-black rounded-full text-sm font-semibold hover:brightness-110 transition"
+                  >
+                    Join Battle
+                  </Link>
 
                 ) : (
                   <Link
-                  href={`/codebattles`}
-                  className="inline-block mt-4 px-4 py-2 bg-[#00FFFF] text-black rounded-full text-sm font-semibold hover:brightness-110 transition"
-                >
-                  Upcoming
-                </Link>
+                    href={`/codebattles`}
+                    className="inline-block mt-4 px-4 py-2 bg-[#00FFFF] text-black rounded-full text-sm font-semibold hover:brightness-110 transition"
+                  >
+                    Upcoming
+                  </Link>
                 )
               })()}
             </div>

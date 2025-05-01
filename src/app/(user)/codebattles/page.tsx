@@ -117,7 +117,9 @@ export default async function CodeBattlesPage() {
               {/* CTA */}
               {(()=> {
                 const isLive = new Date(battle.dateISO) <= new Date();
-                return isLive ? (
+                console.log("isLive", isLive);
+                
+                return true ? (
                 <Link
                   href={`/codebattles/${battle.id}`}
                   className="inline-block mt-4 px-4 py-2 bg-[#00FFFF] text-black rounded-full text-sm font-semibold hover:brightness-110 transition"

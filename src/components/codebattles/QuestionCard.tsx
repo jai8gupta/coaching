@@ -11,7 +11,7 @@ const QuestionCard = ({
   }) => {
     return (
       <div className="bg-card border border-border rounded-xl p-6 mb-6">
-        <h2 className="text-lg font-semibold mb-4">
+        <h2 className="text-lg text-black  dark:text-white font-semibold mb-4">
           {index + 1}. {question.question_text}
         </h2>
   
@@ -25,8 +25,8 @@ const QuestionCard = ({
               className={`block w-full text-left px-4 py-2 rounded-md border transition-all
                   ${
                     selected === i
-                      ? "bg-blue-600 text-white border-blue-500"
-                      : "bg-background text-white border-border hover:bg-blue-950 hover:border-blue-400"
+                      ? "bg-red-500 dark:bg-blue-600 text-black  dark:text-white border-blue-500"
+                      : "bg-background text-black dark:text-white border-border hover:bg-red-200 dark:hover:bg-blue-950 hover:border-blue-400"
                   }`}
             >
               {option}

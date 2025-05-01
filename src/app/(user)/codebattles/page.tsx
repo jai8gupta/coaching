@@ -93,7 +93,7 @@ export default async function CodeBattlesPage() {
               </div>
 
               {/* Prize */}
-              <div className="flex items-center gap-2 text-sm text-[#00FFFF] font-medium">
+              <div className="flex items-center gap-2 text-sm text-red-500 dark:text-[#00FFFF] font-medium">
                 <IndianRupee className="h-4 w-4" />
                 {battle.prize}
               </div>

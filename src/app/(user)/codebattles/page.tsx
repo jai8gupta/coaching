@@ -113,10 +113,10 @@ export default async function CodeBattlesPage() {
                   <Flame className="h-4 w-4" />
                   {battle.level}
                 </span>
-                <span className="flex items-center gap-1">
+                {/* <span className="flex items-center gap-1">
                   <Timer className="h-4 w-4" />
                   {battle.duration}
-                </span>
+                </span> */}
                 <span className="flex items-center gap-1">
                   <Code2 className="h-4 w-4" />
                   {battle.type}

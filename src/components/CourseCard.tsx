@@ -8,12 +8,11 @@ import { Loader } from './loader';
 import { BookOpen } from 'lucide-react';
 interface CourseCardProps {
     course: GetCoursesQueryResult[number];
-    progress?: any;
     href: string
 }
 
-const CourseCard = ({ course, progress, href }: CourseCardProps) => {
-  
+const CourseCard = (props: CourseCardProps) => {
+  const { course, href } = props || {};
     return (
       <Link
       href={href || "/"}

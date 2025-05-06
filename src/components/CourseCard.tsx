@@ -19,15 +19,16 @@ const CourseCard = (props: CourseCardProps) => {
       prefetch={false}
       className="group hover:no-underline flex"
     >
-      <div className="bg-card rounded-xl overflow-hidden shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl hover:translate-y-[-4px] border border-border flex flex-col flex-1">
+      <div className="bg-card rounded-xl overflow-hidden shadow-lg  border border-border flex flex-col flex-1"> {/**transition-all duration-300 ease-in-out hover:shadow-xl hover:translate-y-[-4px] */}
         <div className="relative h-52 w-full overflow-hidden">
           {course?.image ? (
             <Image
+            priority
               src={urlFor(course?.image)?.url() || ""}
               alt={course?.title || "Course Image"}
               fill
-              className="object-cover transition-transform duration-300 group-hover:scale-110"
-            />
+              className="object-cover" 
+            /> // transition-transform duration-300 group-hover:scale-110
           ) : (
             <div className="h-full w-full flex items-center justify-center bg-muted">
               <Loader size="lg" />
@@ -73,7 +74,9 @@ const CourseCard = (props: CourseCardProps) => {
                     </div>
                   ) : (
                     <div className="h-8 w-8 mr-2 rounded-full bg-muted flex items-center justify-center">
-                      <Loader size="sm" />
+                      {typeof window !== 'undefined' && (
+                        <Loader size="sm" />
+                      )}
                     </div>
                   )}
                   <span className="text-sm text-muted-foreground">

@@ -47,7 +47,6 @@ export default async function MyCoursesPage() {
                 <CourseCard
                   key={item.course._id}
                   course={item.course}
-                  progress={item.progress}
                   href={`/dashboard/courses/${item.course._id}`}
                 />
               );

@@ -51,11 +51,11 @@ const CourseCard = (props: CourseCardProps) => {
             )}
           </div>
         </div>
-        {/* <div className="p-6 flex flex-col flex-1">
+        <div className="p-6 flex flex-col flex-1">
           <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
             {course?.title}
           </h3>
-          <p className="text-muted-foreground mb-4 line-clamp-2 flex-1">
+          {/* <p className="text-muted-foreground mb-4 line-clamp-2 flex-1">
             {course?.description}
           </p>
           <div className="space-y-4 mt-auto">
@@ -85,8 +85,8 @@ const CourseCard = (props: CourseCardProps) => {
                 <BookOpen className="h-4 w-4 text-muted-foreground" />
               </div>
             )}
-          </div>
-        </div> */}
+          </div> */}
+        </div>
       </div>
     </Link>
     )

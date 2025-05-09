@@ -56,7 +56,7 @@ const CourseCard = (props: CourseCardProps) => {
             {course?.title}
           </h3>
           {typeof course?.description === 'string' && course.description.trim() !== '' && (
-              <div className="text-muted-foreground mb-4 line-clamp-2 flex-1">
+              <div className="text-muted-foreground mb-4 flex-1">
                 {JSON.stringify(course.description)}
               </div>
             )}

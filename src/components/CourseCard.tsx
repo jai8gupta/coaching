@@ -55,9 +55,9 @@ const CourseCard = (props: CourseCardProps) => {
           <h3 className="text-xl font-bold mb-2 group-hover:text-primary transition-colors duration-300">
             {course?.title}
           </h3>
-          <p className="text-muted-foreground mb-4 line-clamp-2 flex-1">
-            {course?.description} Ram
-          </p>
+          {course && course?.description && (<p className="text-muted-foreground mb-4 line-clamp-2 flex-1">
+            {course?.description}
+          </p>)}
           {/* <div className="space-y-4 mt-auto">
             {course?.instructor && (
               <div className="flex items-center justify-between">

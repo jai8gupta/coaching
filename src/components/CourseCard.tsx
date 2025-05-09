@@ -1,10 +1,10 @@
-import Link from 'next/link';
+// import Link from 'next/link';
 import React from 'react'
 import { GetCoursesQueryResult } from '../../sanity.types';
-import Image from 'next/image';
-import { urlFor } from '@/sanity/lib/image';
-import { Loader } from './loader';
-import { BookOpen } from 'lucide-react';
+// import Image from 'next/image';
+// import { urlFor } from '@/sanity/lib/image';
+// import { Loader } from './loader';
+// import { BookOpen } from 'lucide-react';
 interface CourseCardProps {
     course: GetCoursesQueryResult[number];
     href: string
@@ -13,14 +13,13 @@ interface CourseCardProps {
 const CourseCard = (props: CourseCardProps) => {
   const { course, href } = props || {};
     return (
-      <Link
+      <a
       href={href || "/"}
-      prefetch={false}
       className="group hover:no-underline flex"
     >
       <div className="bg-card rounded-xl overflow-hidden shadow-lg  border border-border flex flex-col flex-1"> {/**transition-all duration-300 ease-in-out hover:shadow-xl hover:translate-y-[-4px] */}
         <div className="relative h-52 w-full overflow-hidden">
-          {course?.image ? (
+          {/* {course?.image ? (
             <Image
             priority
               src={urlFor(course?.image)?.url() || ""}
@@ -32,7 +31,7 @@ const CourseCard = (props: CourseCardProps) => {
             <div className="h-full w-full flex items-center justify-center bg-muted">
               <Loader size="lg" />
             </div>
-          )}
+          )} */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-60 group-hover:opacity-80 transition-opacity duration-300" />
           <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between">
             <span className="text-sm font-medium px-3 py-1 bg-black/50 text-white rounded-full backdrop-blur-sm">
@@ -62,7 +61,7 @@ const CourseCard = (props: CourseCardProps) => {
             {course?.instructor && (
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  {course?.instructor?.photo ? (
+                  {/* {course?.instructor?.photo ? (
                     <div className="relative h-8 w-8 mr-2">
                       <Image
                         src={urlFor(course?.instructor?.photo)?.url() || ""}
@@ -77,18 +76,18 @@ const CourseCard = (props: CourseCardProps) => {
                         <Loader size="sm" />
                       )}
                     </div>
-                  )}
+                  )} */}
                   <span className="text-sm text-muted-foreground">
                     by {course?.instructor?.name}
                   </span>
                 </div>
-                <BookOpen className="h-4 w-4 text-muted-foreground" />
+                {/* <BookOpen className="h-4 w-4 text-muted-foreground" /> */}
               </div>
             )}
           </div>
         </div>
       </div>
-    </Link>
+    </a>
     )
 }
 

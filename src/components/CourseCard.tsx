@@ -12,7 +12,7 @@ interface CourseCardProps {
 
 const CourseCard = (props: CourseCardProps) => {
   const { course, href } = props || {};
-    return (
+    return course &&(
       <Link
       href={href || "/"}
       prefetch={false}
@@ -56,7 +56,7 @@ const CourseCard = (props: CourseCardProps) => {
             {course?.title}
           </h3>
           <p className="text-muted-foreground mb-4 line-clamp-2 flex-1">
-            {/* {course?.description} */} Ram
+            {course?.description} Ram
           </p>
           {/* <div className="space-y-4 mt-auto">
             {course?.instructor && (

@@ -851,6 +851,13 @@
         },
         "optional": true
       },
+      "keyword": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "string"
+        },
+        "optional": true
+      },
       "modules": {
         "type": "objectAttribute",
         "value": {

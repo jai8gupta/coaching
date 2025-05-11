@@ -167,6 +167,7 @@ export type Course = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "category";
   };
+  keyword?: string;
   modules?: Array<{
     _ref: string;
     _type: "reference";
@@ -363,6 +364,7 @@ export type GetCourseByIdQueryResult = {
     icon?: string;
     color?: string;
   } | null;
+  keyword?: string;
   modules: Array<{
     _id: string;
     _type: "module";
@@ -442,6 +444,7 @@ export type GetCourseBySlugQueryResult = {
     icon?: string;
     color?: string;
   } | null;
+  keyword?: string;
   modules: Array<{
     _id: string;
     _type: "module";
@@ -521,6 +524,7 @@ export type GetCoursesQueryResult = Array<{
     icon?: string;
     color?: string;
   } | null;
+  keyword?: string;
   modules?: Array<{
     _ref: string;
     _type: "reference";
@@ -586,6 +590,7 @@ export type SearchCoursesQueryResult = Array<{
     icon?: string;
     color?: string;
   } | null;
+  keyword?: string;
   modules?: Array<{
     _ref: string;
     _type: "reference";
@@ -682,6 +687,7 @@ export type GetEnrolledCoursesQueryResult = {
         icon?: string;
         color?: string;
       } | null;
+      keyword?: string;
       modules?: Array<{
         _ref: string;
         _type: "reference";

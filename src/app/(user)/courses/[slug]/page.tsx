@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { ArrowLeft, BookOpen } from 'lucide-react';
 import EnrollButton from '@/components/EnrollButton';
 import { isEnrolledInCourse } from '@/sanity/lib/student/isEnrolledInCourse';
+import { Metadata } from 'next';
 interface CoursePageProps {
   params: Promise<{
     slug: string
@@ -159,3 +160,34 @@ const CoursePage = async (props: CoursePageProps) => {
 }
 
 export default CoursePage;
+
+export const generateMetadata = async (props: CoursePageProps): Promise<Metadata> => {
+  const { slug } = await props?.params || {};
+  const course = await getCourseBySlug(slug);  
+
+  return {
+    title: `${course?.title} – The Prototype Studio`,
+    description: course?.description || "Excellet course for beginners and working professionals",
+    keywords: course?.keyword || "",
+    openGraph: {
+      title: `${course?.title} – The Prototype Studio`,
+      description: course?.description || "Excellet course for beginners and working professionals",
+      url: `https://www.theprototypestudio.in/courses/${slug}`,
+      siteName: "The Prototype Studio",
+      images: [
+        {
+          url: urlFor(course?.image!).url() || "",
+          width: 1200,
+          height: 630,
+          alt: course?.title || "",
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      title: `${course?.title} – The Prototype Studio`,
+      description:  course?.description || "Excellet course for beginners and working professionals",
+      images: [urlFor(course?.image!).url() || ""],
+    },
+  }
+}

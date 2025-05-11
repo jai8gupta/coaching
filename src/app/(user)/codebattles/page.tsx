@@ -1,6 +1,7 @@
 import { Award, Timer, Flame, Code2, CalendarDays, IndianRupee, AlertCircle } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
+import { Metadata } from "next";
 
 export const revalidate = 60
 
@@ -180,3 +181,32 @@ const getDataFromServer = async () => {
 
   return { data: transformed };
 };
+
+export const generateMetadata = (): Metadata => {
+
+  return {
+    title: "CodeBattles – Compete in Real-Time Coding Challenges | The Prototype Studio",
+    description: "Join CodeBattles to test your skills in real-time coding competitions. Win prizes, climb the leaderboard, and sharpen your coding abilities.",
+    keywords: "coding competition, CodeBattles, online coding contest, real-time challenges, competitive programming, The Prototype Studio",
+    openGraph: {
+      title: "CodeBattles – Real-Time Coding Challenges",
+      description: "Compete live, rank on leaderboards, and win rewards with CodeBattles at The Prototype Studio.",
+      url: "https://www.theprototypestudio.in/codebattles",
+      siteName: "The Prototype Studio",
+      images: [
+        {
+          url: "/logo.webp",
+          width: 1200,
+          height: 630,
+          alt: "CodeBattles Challenge Banner",
+        },
+      ],
+      type: "website",
+    },
+    twitter: {
+      title: "CodeBattles – Coding Contests for Real Developers",
+      description: "Show your coding skills in real-time challenges. Compete, win, and level up at The Prototype Studio.",
+      images: ["/logo.webp"],
+    },
+  };
+}

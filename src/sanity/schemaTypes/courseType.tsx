@@ -45,6 +45,11 @@ export const courseType = defineType({
             validation: (rule) => rule.required()
         }),
         defineField({
+            name: 'keyword',
+            title: 'Keyword',
+            type: 'string',
+        }),
+        defineField({
             name: 'modules',
             title: 'Modules',
             type: 'array',

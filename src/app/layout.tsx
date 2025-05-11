@@ -23,6 +23,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning >
       <head>
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3975528961034908" crossOrigin="anonymous"></script>
+      <meta name="google-site-verification" content="oHu1fiBxqSIipUJawcsibGx9TDvKiKiOT6F1KGXyUMs" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

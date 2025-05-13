@@ -1,5 +1,7 @@
 import getCourseById from "@/sanity/lib/courses/getCourseById";
+import { Metadata } from "next";
 import { redirect } from "next/navigation";
+import { urlFor } from '@/sanity/lib/image';
 
 interface CoursePageProps {
   params: Promise<{
@@ -33,4 +35,34 @@ export default async function CoursePage({ params }: CoursePageProps) {
       </div>
     </div>
   );
+}
+
+export const generateMetadata = async (props: CoursePageProps): Promise<Metadata> => {
+  const { courseId } = await props?.params || {};
+  const course = await getCourseById(courseId);    
+  return {
+    title: `${course?.title} – The Prototype Studio`,
+    description: course?.description || "Excellet course for beginners and working professionals",
+    keywords: course?.keyword || "",
+    openGraph: {
+      title: `${course?.title} – The Prototype Studio`,
+      description: course?.description || "Excellet course for beginners and working professionals",
+      url: `https://www.theprototypestudio.in/courses/${courseId}`,
+      siteName: "The Prototype Studio",
+      images: [
+        {
+          url: urlFor(course?.image!).url() || "",
+          width: 1200,
+          height: 630,
+          alt: course?.title || "",
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      title: `${course?.title} – The Prototype Studio`,
+      description:  course?.description || "Excellet course for beginners and working professionals",
+      images: [urlFor(course?.image!).url() || ""],
+    },
+  }
 }

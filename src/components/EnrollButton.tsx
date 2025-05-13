@@ -26,23 +26,23 @@ const EnrollButton = (props: Props) => {
         );
       }
     
-      if(!session?.user?.id){
-        return <>
-        <span
-        onClick={() => signIn("google")}
-            className={`w-full rounded-lg px-6 py-3 font-medium transition-all duration-300 ease-in-out relative h-12
-            ${isPending || !session?.user?.id
-                    ? "bg-gray-100 text-black cursor-pointer  hover:scale-100"
-                    : "bg-white text-black hover:scale-105 hover:shadow-lg hover:shadow-black/10"
-                }
-        `}
-        >
-          <span className={`${isPending ? "opacity-0" : "opacity-100"}`}>
-              Sign in to Enroll For Free
-          </span>
-        </span>
-        </>
-      }
+      // if(!session?.user?.id){
+      //   return <>
+      //   <span
+      //   onClick={() => signIn("google")}
+      //       className={`w-full rounded-lg px-6 py-3 font-medium transition-all duration-300 ease-in-out relative h-12
+      //       ${isPending || !session?.user?.id
+      //               ? "bg-gray-100 text-black cursor-pointer  hover:scale-100"
+      //               : "bg-white text-black hover:scale-105 hover:shadow-lg hover:shadow-black/10"
+      //           }
+      //   `}
+      //   >
+      //     <span className={`${isPending ? "opacity-0" : "opacity-100"}`}>
+      //         Sign in to Enroll For Free
+      //     </span>
+      //   </span>
+      //   </>
+      // }
 
     if (isEnrolled || Number(price) === 0) {
         return (

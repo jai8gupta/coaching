@@ -1,7 +1,8 @@
 import { redirect } from "next/navigation";
 import { getLessonById } from "@/sanity/lib/lessons/getLessonById";
-import { PortableText } from "@portabletext/react";
-import { PortableTextReactComponents } from "@portabletext/react";
+import { Metadata } from "next";
+import getCourseById from "@/sanity/lib/courses/getCourseById";
+import { urlFor } from "@/sanity/lib/image";
 export const revalidate = 60
 
 interface LessonPageProps {
@@ -19,63 +20,6 @@ export default async function LessonPage({ params }: LessonPageProps) {
   if (!lesson) {
     return redirect(`/dashboard/courses/${courseId}`);
   }
-
-const components: PortableTextReactComponents = {
-  types: {
-    image: ({ value }) => (
-      <img
-        src={value.asset?.url}
-        alt={value.alt || "Sanity Image"}
-        className="rounded-lg"
-      />
-    ),
-    code: ({ value }) => (
-      <pre className="bg-gray-900 text-white p-4 rounded-lg">
-        <code>{value.code}</code>
-      </pre>
-    ),
-  },
-  block: {
-    h1: ({ children }) => <h1 className="text-3xl font-bold">{children}</h1>,
-    h2: ({ children }) => <h2 className="text-2xl font-semibold">{children}</h2>,
-    h3: ({ children }) => <h3 className="text-xl font-medium">{children}</h3>,
-    h4: ({ children }) => <h4 className="text-lg font-medium">{children}</h4>,
-    normal: ({ children }) => <p className="text-base">{children}</p>,
-    blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-gray-500 italic pl-4">{children}</blockquote>
-    ),
-  },
-  marks: {
-    strong: ({ children }) => <strong className="font-bold">{children}</strong>,
-    em: ({ children }) => <em className="italic">{children}</em>,
-    underline: ({ children }) => <span className="underline">{children}</span>,
-    code: ({ children }) => (
-      <code className="bg-gray-200 text-red-600 p-1 rounded">{children}</code>
-    ),
-    link: ({ value, children }) => (
-      <a href={value.href} className="text-blue-500 underline">
-        {children}
-      </a>
-    ),
-  },
-  list: {
-    bullet: ({ children }) => <ul className="list-disc pl-6">{children}</ul>,
-    number: ({ children }) => <ol className="list-decimal pl-6">{children}</ol>,
-  },
-  listItem: {
-    bullet: ({ children }) => <li className="mb-2">{children}</li>,
-    number: ({ children }) => <li className="mb-2">{children}</li>,
-  },
-  hardBreak: () => <br />,
-  unknownMark: ({ children }) => <span className="text-gray-500">{children}</span>,
-  unknownType: ({ value }) => <span className="text-red-500">Unknown type: {JSON.stringify(value)}</span>,
-  unknownBlockStyle: ({ children }) => <p className="text-gray-400">{children}</p>,
-  unknownList: ({ children }) => <ul className="text-gray-400">{children}</ul>,
-  unknownListItem: ({ children }) => <li className="text-gray-400">{children}</li>,
-};
-;
-  
-  
 
   return (
     <div className="h-full flex flex-col overflow-hidden">
@@ -100,4 +44,35 @@ const components: PortableTextReactComponents = {
       </div>
     </div>
   );
+}
+
+export const generateMetadata = async (props: LessonPageProps): Promise<Metadata> => {
+  const { courseId, lessonId } = await props?.params || {};
+  const course = await getCourseById(courseId);  
+  
+  return {
+    title: `${course?.title} – The Prototype Studio`,
+    description: course?.description || "Excellet course for beginners and working professionals",
+    keywords: course?.keyword || "",
+    openGraph: {
+      title: `${course?.title} – The Prototype Studio`,
+      description: course?.description || "Excellet course for beginners and working professionals",
+      url: `https://www.theprototypestudio.in/courses/${courseId}/lessons/${lessonId}`,
+      siteName: "The Prototype Studio",
+      images: [
+        {
+          url: urlFor(course?.image!).url() || "",
+          width: 1200,
+          height: 630,
+          alt: course?.title || "",
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      title: `${course?.title} – The Prototype Studio`,
+      description:  course?.description || "Excellet course for beginners and working professionals",
+      images: [urlFor(course?.image!).url() || ""],
+    },
+  }
 }

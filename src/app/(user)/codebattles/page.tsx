@@ -56,14 +56,15 @@ export default async function CodeBattlesPage() {
             className="bg-card border border-border rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition"
           >
             {(() => {
-              const isLive = new Date(battle.dateISO).getTime() >= Date.now();
-              const status = isLive ? "Live" : "Coming Soon";
+              const istOffsetMs = 5.5 * 60 * 60 * 1000;
+              const battleTime = new Date(battle.dateISO).getTime() - istOffsetMs;
+              const isLive = Date.now() >= battleTime;
               return (
                 <span
                   className={`relative top-4 left-4 z-10 text-xs font-semibold px-3 py-1 rounded-full backdrop-blur-sm
-                    ${isLive ? "bg-green-500/20 text-green-400" : "bg-yellow-500/20 text-yellow-300"}`}
+                    ${isLive ? "bg-green-500/20 text-black dark:text-green-400" : "bg-yellow-500/20 dark:text-yellow-300 text-black"}`}
                 >
-                  {status}
+                  {battle?.battleStatus?.toUpperCase()}
                 </span>
               );
             })()}
@@ -126,8 +127,11 @@ export default async function CodeBattlesPage() {
 
               {/* CTA */}
               {(() => {
-                const isLive = new Date(battle.dateISO).getTime() >= Date.now();
-                return isLive ? (
+                const istOffsetMs = 5.5 * 60 * 60 * 1000;
+                const battleTime = new Date(battle.dateISO).getTime() - istOffsetMs;
+                const isLive = Date.now() >= battleTime;
+                
+                return isLive && battle?.battleStatus !== "DONE" ? (
                   <Link
                     href={`/codebattles/${battle.id}`}
                     className="inline-block mt-4 px-4 py-2 bg-[#00FFFF] text-black rounded-full text-sm font-semibold hover:brightness-110 transition"
@@ -138,9 +142,9 @@ export default async function CodeBattlesPage() {
                 ) : (
                   <Link
                     href={`/codebattles`}
-                    className="inline-block mt-4 px-4 py-2 bg-[#00FFFF] text-black rounded-full text-sm font-semibold hover:brightness-110 transition"
+                    className={`inline-block mt-4 px-4 py-2 ${battle?.battleStatus === "DONE" ? "bg-lime-500" :"bg-[#00FFFF]"} text-black rounded-full text-sm font-semibold ${battle?.battleStatus === "DONE" ? "opacity-50 cursor-not-allowed" :"hover:brightness-110 transition"}`}
                   >
-                    Upcoming
+                    {battle?.battleStatus === "DONE" ? "Completed"  :"Upcoming"}
                   </Link>
                 )
               })()}
@@ -158,24 +162,25 @@ const getDataFromServer = async () => {
   const raw = await response.json();
 
   const transformed = raw?.data?.map((battle: any) => {
-    const start = new Date(battle.start_time);
-    const end = new Date(battle.end_time);
-    const durationMinutes = Math.round((end.getTime() - start.getTime()) / (1000 * 60));
-
+    const start = new Date(battle?.start_time);
+    const end = new Date(battle?.end_time);
+    const durationMinutes = Math.round((end?.getTime() - start?.getTime()) / (1000 * 60));
+    
     return {
-      id: battle.id,
-      title: battle.title,
-      dateISO: battle.start_time,
+      id: battle?.id,
+      title: battle?.title,
+      dateISO: battle?.start_time,
       date: start.toLocaleDateString("en-IN", {
         year: "numeric",
         month: "long",
         day: "numeric",
       }),
-      prize: battle.prize,
-      image: battle.image || null,
+      prize: battle?.prize,
+      image: battle?.image || null,
       duration: `${durationMinutes} min`,
       level: battle?.level || "Intermediate",
       type: battle?.type || "MCQ",
+      battleStatus: battle?.status || ""
     };
   });
 

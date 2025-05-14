@@ -16,9 +16,9 @@ export default function DashbardLayout({
             defaultTheme="system"
             enableSystem
             disableTransitionOnChange>
-                <SidebarProvider>
+                {/* <SidebarProvider>
+                </SidebarProvider> */}
                     <div className="h-full">{children}</div>
-                </SidebarProvider>
             </ThemeProvider>
             <SanityLive />
         </SessionProvider>

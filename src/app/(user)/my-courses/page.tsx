@@ -13,7 +13,7 @@ export default async function MyCoursesPage() {
     return redirect("/");
   }
 
-  const enrolledCourses = await getEnrolledCourses(session?.user?.id);
+  const enrolledCourses = [];
 
   return (
     <div className="h-full pt-16">
@@ -27,8 +27,7 @@ export default async function MyCoursesPage() {
           <div className="text-center py-12">
             <h2 className="text-2xl font-semibold mb-4">No courses yet</h2>
             <p className="text-muted-foreground mb-8">
-              You haven&apos;t enrolled in any courses yet. Browse our courses
-              to get started!
+              You haven&apos;t enrolled in any courses yet, since our courses are free there isnt any enrollment
             </p>
             <Link
               href="/"
@@ -40,17 +39,17 @@ export default async function MyCoursesPage() {
           </div>
         ) : (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {enrolledCourses.map((item: any) => {
+            {/* {enrolledCourses.map((item: any) => {
               if (!item || !item.course) return null;
 
               return (
                 <CourseCard
                   key={item.course._id}
                   course={item.course}
-                  href={`/dashboard/courses/${item.course._id}`}
+                  href={`/dashboard/courses/${item.course?.slug?.current}/lessons/${}`}
                 />
               );
-            })}
+            })} */}
           </div>
         )}
       </div>

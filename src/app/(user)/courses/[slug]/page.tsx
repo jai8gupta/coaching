@@ -17,6 +17,7 @@ interface CoursePageProps {
 const CoursePage = async (props: CoursePageProps) => {
   const { slug } = await props?.params || {};
   const course = await getCourseBySlug(slug);
+  
   const session = await auth()
   const isEnrolled = session?.user?.id && course?._id ? await isEnrolledInCourse(session?.user?.id, course?._id) : false;
   if (!course) {
@@ -26,6 +27,8 @@ const CoursePage = async (props: CoursePageProps) => {
       </div>
     )
   }
+
+  const lessonId = course?.modules?.[0]?.lessons?.[0].slug?.current;
 
   return (
     <div className="min-h-screen bg-background">
@@ -68,7 +71,7 @@ const CoursePage = async (props: CoursePageProps) => {
               <div className="text-3xl font-bold text-white mb-4">
                 {course.price === 0 ? "Free" : `₹${course.price}`}
               </div>
-              <EnrollButton courseId={course?.slug!} price={course.price || 0} isEnrolled={isEnrolled} />
+              <EnrollButton courseId={course?.slug!} price={course.price || 0} lessonId={lessonId || ""} isEnrolled={isEnrolled} />
             </div>
           </div>
         </div>

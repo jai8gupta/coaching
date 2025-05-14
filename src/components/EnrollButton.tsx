@@ -9,14 +9,14 @@ import { signIn } from "next-auth/react"
 interface Props {
     courseId: string;
     isEnrolled: boolean;
-    price: number
+    price: number;
+    lessonId: string;
 }
 
 const EnrollButton = (props: Props) => {
-    const { courseId, isEnrolled, price} = props;
+    const { courseId, isEnrolled, price, lessonId} = props;
     const { data: session, status } = useSession();
     const [isPending, startTransition] = useTransition();
-   
 
     if (status === 'loading' || isPending) {
         return (
@@ -26,29 +26,12 @@ const EnrollButton = (props: Props) => {
         );
       }
     
-      // if(!session?.user?.id){
-      //   return <>
-      //   <span
-      //   onClick={() => signIn("google")}
-      //       className={`w-full rounded-lg px-6 py-3 font-medium transition-all duration-300 ease-in-out relative h-12
-      //       ${isPending || !session?.user?.id
-      //               ? "bg-gray-100 text-black cursor-pointer  hover:scale-100"
-      //               : "bg-white text-black hover:scale-105 hover:shadow-lg hover:shadow-black/10"
-      //           }
-      //   `}
-      //   >
-      //     <span className={`${isPending ? "opacity-0" : "opacity-100"}`}>
-      //         Sign in to Enroll For Free
-      //     </span>
-      //   </span>
-      //   </>
-      // }
 
     if (isEnrolled || Number(price) === 0) {
         return (
           <Link
             prefetch={false}
-            href={`/dashboard/courses/${courseId}`}
+            href={`/dashboard/courses/${courseId}/lessons/${lessonId}`}
             className="w-full rounded-lg px-6 py-3 font-medium bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:from-green-600 hover:to-emerald-600 transition-all duration-300 h-12 flex items-center justify-center gap-2 group"
           >
             <span>Access Course</span>

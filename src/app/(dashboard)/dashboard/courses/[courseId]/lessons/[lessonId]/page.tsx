@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation";
-import { getLessonById } from "@/sanity/lib/lessons/getLessonById";
 import { Metadata } from "next";
-import getCourseById from "@/sanity/lib/courses/getCourseById";
+import getCourseBySlugAsId from "@/sanity/lib/courses/getCourseBySlugAsId";
 import { urlFor } from "@/sanity/lib/image";
+import { getLessonBySlug } from "@/sanity/lib/lessons/getLessonBySlug";
 export const revalidate = 60
 
 interface LessonPageProps {
@@ -13,9 +13,8 @@ interface LessonPageProps {
 }
 
 export default async function LessonPage({ params }: LessonPageProps) {
-  const { courseId, lessonId } = await params;
-
-  const lesson = await getLessonById(lessonId);
+  const { courseId, lessonId } = await params;  
+  const lesson = await getLessonBySlug(lessonId);
     
   if (!lesson) {
     return redirect(`/dashboard/courses/${courseId}`);
@@ -48,7 +47,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
 export const generateMetadata = async (props: LessonPageProps): Promise<Metadata> => {
   const { courseId, lessonId } = await props?.params || {};
-  const course = await getCourseById(courseId);  
+  const course = await getCourseBySlugAsId(courseId);  
   
   return {
     title: `${course?.title} – The Prototype Studio`,

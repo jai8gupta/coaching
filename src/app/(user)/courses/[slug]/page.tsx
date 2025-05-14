@@ -68,7 +68,7 @@ const CoursePage = async (props: CoursePageProps) => {
               <div className="text-3xl font-bold text-white mb-4">
                 {course.price === 0 ? "Free" : `₹${course.price}`}
               </div>
-              <EnrollButton courseId={course._id} price={course.price || 0} isEnrolled={isEnrolled} />
+              <EnrollButton courseId={course?.slug!} price={course.price || 0} isEnrolled={isEnrolled} />
             </div>
           </div>
         </div>

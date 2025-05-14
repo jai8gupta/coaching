@@ -1,4 +1,4 @@
-import getCourseById from "@/sanity/lib/courses/getCourseById";
+import getCourseBySlugAsId from "@/sanity/lib/courses/getCourseBySlugAsId";
 import { Metadata } from "next";
 import { redirect } from "next/navigation";
 import { urlFor } from '@/sanity/lib/image';
@@ -12,16 +12,15 @@ export const revalidate = 60
 
 export default async function CoursePage({ params }: CoursePageProps) {
   const { courseId } = await params;
-  const course = await getCourseById(courseId);
-
+  const course = await getCourseBySlugAsId(courseId);  
   if (!course) {
     return redirect("/");
   }
 
   // Redirect to the first lesson of the first module if available
-  if (course.modules?.[0]?.lessons?.[0]?._id) {
+  if (course.modules[0].lessons[0].slug?.current) {    
     return redirect(
-      `/dashboard/courses/${courseId}/lessons/${course.modules[0].lessons[0]._id}`
+      `/dashboard/courses/${course?.slug?.current}/lessons/${course.modules[0].lessons[0].slug?.current}`
     );
   }
 
@@ -39,7 +38,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
 
 export const generateMetadata = async (props: CoursePageProps): Promise<Metadata> => {
   const { courseId } = await props?.params || {};
-  const course = await getCourseById(courseId);    
+  const course = await getCourseBySlugAsId(courseId);    
   return {
     title: `${course?.title} – The Prototype Studio`,
     description: course?.description || "Excellet course for beginners and working professionals",

@@ -37,14 +37,15 @@ export function Sidebar({ course }: SidebarProps) {
   const { isOpen, toggle, close } = useSidebar();
   const [isMounted, setIsMounted] = useState(false);
   const [openModules, setOpenModules] = useState<string[]>([]);
-
+  console.log("course sidebar", course);
+  
   useEffect(() => {
     if (pathname && course?.modules) {
       const currentModuleId = course.modules.find((module: { lessons: any[]; }) =>
         module.lessons?.some(
-          (lesson: { _id: any; }) =>
+          (lesson: any) =>
             pathname ===
-            `/dashboard/courses/${course._id}/lessons/${lesson._id}`
+            `/dashboard/courses/${course?.slug?.current}/lessons/${lesson?.slug?.current}`
         )
       )?._id;
 
@@ -128,12 +129,12 @@ export function Sidebar({ course }: SidebarProps) {
                     {module.lessons?.map((lesson, lessonIndex) => {
                       const isActive =
                         pathname ===
-                        `/dashboard/courses/${course._id}/lessons/${lesson._id}`;
+                        `/dashboard/courses/${course?.slug?.current}/lessons/${lesson?.slug?.current}`;
                       return (
                         <Link
-                          key={lesson._id}
+                          key={lesson?.slug?.current}
                           prefetch={false}
-                          href={`/dashboard/courses/${course._id}/lessons/${lesson._id}`}
+                          href={`/dashboard/courses/${course?.slug?.current}/lessons/${lesson?.slug?.current}`}
                           onClick={close}
                           className={cn(
                             "flex items-center pl-8 lg:pl-10 pr-2 lg:pr-4 py-2 gap-x-2 lg:gap-x-4 group hover:bg-muted/50 transition-colors relative",

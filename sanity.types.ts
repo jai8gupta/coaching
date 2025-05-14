@@ -140,6 +140,45 @@ export type Enrollment = {
   enrolledAt?: string;
 };
 
+export type BlockContent = Array<{
+  children?: Array<{
+    marks?: Array<string>;
+    text?: string;
+    _type: "span";
+    _key: string;
+  }>;
+  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
+  listItem?: "bullet" | "number";
+  markDefs?: Array<{
+    href?: string;
+    _type: "link";
+    _key: string;
+  }>;
+  level?: number;
+  _type: "block";
+  _key: string;
+}>;
+
+export type Lesson = {
+  _id: string;
+  _type: "lesson";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  slug?: Slug;
+  course?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "course";
+  };
+  description?: string;
+  videoUrl?: string;
+  loomUrl?: string;
+  content?: string;
+};
+
 export type Course = {
   _id: string;
   _type: "course";
@@ -204,6 +243,19 @@ export type Instructor = {
   };
 };
 
+export type Category = {
+  _id: string;
+  _type: "category";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  description?: string;
+  icon?: string;
+  color?: string;
+};
+
 export type SanityImageCrop = {
   _type: "sanity.imageCrop";
   top?: number;
@@ -261,52 +313,6 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type Category = {
-  _id: string;
-  _type: "category";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
-  description?: string;
-  icon?: string;
-  color?: string;
-};
-
-export type BlockContent = Array<{
-  children?: Array<{
-    marks?: Array<string>;
-    text?: string;
-    _type: "span";
-    _key: string;
-  }>;
-  style?: "normal" | "h1" | "h2" | "h3" | "h4" | "h5" | "h6" | "blockquote";
-  listItem?: "bullet" | "number";
-  markDefs?: Array<{
-    href?: string;
-    _type: "link";
-    _key: string;
-  }>;
-  level?: number;
-  _type: "block";
-  _key: string;
-}>;
-
-export type Lesson = {
-  _id: string;
-  _type: "lesson";
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  title?: string;
-  slug?: Slug;
-  description?: string;
-  videoUrl?: string;
-  loomUrl?: string;
-  content?: string;
-};
-
 export type Slug = {
   _type: "slug";
   current?: string;
@@ -326,12 +332,12 @@ export type Student = {
   imageUrl?: string;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | LessonCompletion | Module | Enrollment | Course | Instructor | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Category | BlockContent | Lesson | Slug | Student;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | LessonCompletion | Module | Enrollment | BlockContent | Lesson | Course | Instructor | Category | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata | Slug | Student;
 export declare const internalGroqTypeReferenceTo: unique symbol;
-// Source: src/sanity/lib/courses/getCourseById.ts
-// Variable: getCourseByIdQuery
+// Source: src/sanity/lib/courses/getCourseBySlugAsId.ts
+// Variable: getCourseBySlugAsIdQuery
 // Query: *[_type == "course" && _id == $id][0] {      ...,  // Spread all course fields      "category": category->{...},  // Expand the category reference, including all its fields      "instructor": instructor->{...},  // Expand the instructor reference, including all its fields      "modules": modules[]-> {  // Expand the array of module references        ...,  // Include all module fields        "lessons": lessons[]-> {...}  // For each module, expand its array of lesson references      }    }
-export type GetCourseByIdQueryResult = {
+export type getCourseBySlugAsIdQueryResult = {
   _id: string;
   _type: "course";
   _createdAt: string;
@@ -380,6 +386,12 @@ export type GetCourseByIdQueryResult = {
       _rev: string;
       title?: string;
       slug?: Slug;
+      course?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "course";
+      };
       description?: string;
       videoUrl?: string;
       loomUrl?: string;
@@ -460,6 +472,12 @@ export type GetCourseBySlugQueryResult = {
       _rev: string;
       title?: string;
       slug?: Slug;
+      course?: {
+        _ref: string;
+        _type: "reference";
+        _weak?: boolean;
+        [internalGroqTypeReferenceTo]?: "course";
+      };
       description?: string;
       videoUrl?: string;
       loomUrl?: string;
@@ -631,12 +649,27 @@ export type GetLessonByIdQueryResult = {
   _rev: string;
   title?: string;
   slug?: Slug;
+  course?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "course";
+  };
   description?: string;
   videoUrl?: string;
   loomUrl?: string;
   content?: string;
   module: null;
 } | null;
+
+// Source: src/sanity/lib/lessons/getLessons.ts
+// Variable: lesson
+// Query: *[_type == "lesson"]{  _id,  _updatedAt,  "courseId": course->_id}
+export type LessonResult = Array<{
+  _id: string;
+  _updatedAt: string;
+  courseId: string | null;
+}>;
 
 // Source: src/sanity/lib/student/getEnrolledCourses.ts
 // Variable: getEnrolledCoursesQuery
@@ -771,11 +804,12 @@ export type EnrollmentQueryResult = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"course\" && _id == $id][0] {\n      ...,  // Spread all course fields\n      \"category\": category->{...},  // Expand the category reference, including all its fields\n      \"instructor\": instructor->{...},  // Expand the instructor reference, including all its fields\n      \"modules\": modules[]-> {  // Expand the array of module references\n        ...,  // Include all module fields\n        \"lessons\": lessons[]-> {...}  // For each module, expand its array of lesson references\n      }\n    }": GetCourseByIdQueryResult;
+    "*[_type == \"course\" && _id == $id][0] {\n      ...,  // Spread all course fields\n      \"category\": category->{...},  // Expand the category reference, including all its fields\n      \"instructor\": instructor->{...},  // Expand the instructor reference, including all its fields\n      \"modules\": modules[]-> {  // Expand the array of module references\n        ...,  // Include all module fields\n        \"lessons\": lessons[]-> {...}  // For each module, expand its array of lesson references\n      }\n    }": getCourseBySlugAsIdQueryResult;
     "*[_type == \"course\" && slug.current == $slug][0] {\n        ...,\n        \"slug\": slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...},\n        \"modules\": modules[]->{\n        ...,\n        \"lessons\": lessons[]->{...}\n        }\n        }": GetCourseBySlugQueryResult;
     "*[_type == \"course\"] {\n        ...,\n        \"slug\": slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...}\n        }": GetCoursesQueryResult;
     "*[_type == \"course\" && (\n        title match $term + \"*\" || \n        description match $term + \"*\" || \n        category->name match $term + \"*\"\n        )] {\n        ...,\n        \"slug\": slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...}\n        }": SearchCoursesQueryResult;
     "*[_type == \"lesson\" && _id == $id][0] {\n    ...,\n    \"module\": module->{\n      ...,\n      \"course\": course->{...}\n    }\n  }": GetLessonByIdQueryResult;
+    "*[_type == \"lesson\"]{\n  _id,\n  _updatedAt,\n  \"courseId\": course->_id\n}": LessonResult;
     "*[_type == \"student\" && authId == $authId][0] {\n    \"enrolledCourses\": *[_type == \"enrollment\" && student._ref == ^._id] {\n      ...,\n      \"course\": course-> {\n        ...,\n        \"slug\": slug.current,\n        \"category\": category->{...},\n        \"instructor\": instructor->{...}\n      }\n    }\n  }": GetEnrolledCoursesQueryResult;
     "*[_type == \"student\" && authId == $authId][0]": GetStudentByAuthIdQueryResult;
     "*[_type == \"student\" && authId == $authId][0]._id": StudentQueryResult;

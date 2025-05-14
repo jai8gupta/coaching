@@ -22,6 +22,12 @@ export const lessontType = defineType({
             validation: (rule) => rule.required()
         }),
         defineField({
+            name: 'course',
+            title: 'Course',
+            type: 'reference',
+            to: [{ type: 'course' }],
+          }),
+        defineField({
             name: 'description',
             title: 'Description',
             type: 'text',

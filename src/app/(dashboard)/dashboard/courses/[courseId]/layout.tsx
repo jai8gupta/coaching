@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
-import getCourseById from "@/sanity/lib/courses/getCourseById";
+import getCourseBySlugAsId from "@/sanity/lib/courses/getCourseBySlugAsId";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 export const revalidate = 60
 
@@ -16,7 +16,7 @@ export default async function CourseLayout({
 }: CourseLayoutProps) {
   const { courseId } = await params;
 
-  const course = await getCourseById(courseId);
+  const course = await getCourseBySlugAsId(courseId);
 
   if (!course) {
     return redirect("/");

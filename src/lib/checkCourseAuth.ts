@@ -1,5 +1,5 @@
 import { isEnrolledInCourse } from "@/sanity/lib/student/isEnrolledInCourse";
-import getCourseById from "@/sanity/lib/courses/getCourseById";
+import getCourseBySlugAsId from "@/sanity/lib/courses/getCourseBySlugAsId";
 import { getStudentByAuthId } from "@/sanity/lib/student/getStudentByAuthId";
 
 interface AuthResult {
@@ -28,7 +28,7 @@ export async function checkCourseAccess(
   }
 
   const isEnrolled = await isEnrolledInCourse(clerkId, courseId);
-  const course = await getCourseById(courseId);
+  const course = await getCourseBySlugAsId(courseId);
   if (!isEnrolled) {
     return {
       isAuthorized: false,

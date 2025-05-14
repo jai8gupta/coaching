@@ -17,7 +17,15 @@ export default async function LessonPage({ params }: LessonPageProps) {
   const lesson = await getLessonBySlug(lessonId);
     
   if (!lesson) {
-    return redirect(`/dashboard/courses/${courseId}`);
+    return <>
+    <div className="h-full flex flex-col overflow-hidden">
+      <div className="flex-1 overflow-y-auto">
+        <div className="max-w-4xl mx-auto pt-12 pb-20 px-4">
+          <h1 className="text-2xl font-bold mb-4">We will be back soon</h1>
+        </div>
+      </div>
+    </div>
+    </>
   }
 
   return (

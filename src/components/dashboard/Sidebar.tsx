@@ -150,7 +150,7 @@ export function Sidebar({ course }: SidebarProps) {
   return (
     <>
       {/* Thin Mobile Sidebar */}
-      <aside className="fixed inset-y-0 left-0 z-50 flex flex-col items-center w-[60px] border-r bg-background lg:hidden py-4 gap-y-4">
+      {/* <aside className="fixed inset-y-0 left-0 z-50 flex flex-col items-center w-[60px] border-r bg-background lg:hidden py-4 gap-y-4">
         <TooltipProvider delayDuration={0}>
           <Tooltip>
             <TooltipTrigger asChild>
@@ -167,7 +167,7 @@ export function Sidebar({ course }: SidebarProps) {
 
           <Tooltip>
             <TooltipTrigger asChild>
-              {/* <Button
+              <Button
                 onClick={toggle}
                 variant="ghost"
                 size="icon"
@@ -179,14 +179,14 @@ export function Sidebar({ course }: SidebarProps) {
                     isOpen && "rotate-180"
                   )}
                 />
-              </Button> */}
+              </Button>
             </TooltipTrigger>
             <TooltipContent side="right">
               <p>Toggle Sidebar</p>
             </TooltipContent>
           </Tooltip>
         </TooltipProvider>
-      </aside>
+      </aside> */}
 
       {/* Main Sidebar - Desktop & Mobile */}
       {/* <aside

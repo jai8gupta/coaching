@@ -35,9 +35,7 @@ interface SidebarProps {
 export function Sidebar({ course }: SidebarProps) {
   const pathname = usePathname();
   const { isOpen, toggle, close } = useSidebar();
-  const [isMounted, setIsMounted] = useState(false);
   const [openModules, setOpenModules] = useState<string[]>([]);
-  console.log("course sidebar", course);
   
   useEffect(() => {
     if (pathname && course?.modules) {
@@ -55,13 +53,6 @@ export function Sidebar({ course }: SidebarProps) {
     }
   }, [pathname, course, openModules]);
 
-  useEffect(() => {
-    setIsMounted(true);
-  }, []);
-
-  if (!course || !isMounted) {
-    return null;
-  }
 
 
   const SidebarContent = () => (

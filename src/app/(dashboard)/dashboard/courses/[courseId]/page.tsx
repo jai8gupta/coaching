@@ -18,7 +18,7 @@ export default async function CoursePage({ params }: CoursePageProps) {
   }
 
   // Redirect to the first lesson of the first module if available
-  if (course.modules[0].lessons[0].slug?.current) {    
+  if (course?.modules?.[0]?.lessons?.[0].slug?.current) {    
     return redirect(
       `/dashboard/courses/${course?.slug?.current}/lessons/${course.modules[0].lessons[0].slug?.current}`
     );

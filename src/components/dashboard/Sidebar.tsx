@@ -31,7 +31,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ course }: SidebarProps) {
-  const pathname = typeof window !== undefined ? window.location.pathname : "";
+  const pathname = typeof window !== "undefined" ? window?.location?.pathname : "";
   
   const { isOpen, toggle, close } = useSidebar();
   const [openModules, setOpenModules] = useState<string[]>([]);

@@ -24,7 +24,7 @@ export default async function CourseLayout({
 
   return (
     <div className="h-full">
-      {/* <Sidebar course={course} /> */}
+      <Sidebar course={course} />
       <main className="h-full lg:pt-[64px] pl-20 lg:pl-96">{children}</main>
     </div>
   );

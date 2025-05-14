@@ -1,37 +1,37 @@
 "use client";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion";
-import { ScrollArea } from "@/components/ui/scroll-area";
-import { Button } from "@/components/ui/button";
-import {
-  ArrowLeft,
-  Library,
-  ChevronRight,
-  PlayCircle,
-  X,
-} from "lucide-react";
-import Link from "next/link";
-import { cn } from "@/lib/utils";
-import { useSidebar } from "@/components/providers/sidebar-provider";
-import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { DarkModeToggle } from "../DarkModeToggle";
+// import {
+//   Accordion,
+//   AccordionContent,
+//   AccordionItem,
+//   AccordionTrigger,
+// } from "@/components/ui/accordion";
+// import { ScrollArea } from "@/components/ui/scroll-area";
+// import { Button } from "@/components/ui/button";
+// import {
+//   ArrowLeft,
+//   Library,
+//   ChevronRight,
+//   PlayCircle,
+//   X,
+// } from "lucide-react";
+// import Link from "next/link";
+// import { cn } from "@/lib/utils";
+// import { useSidebar } from "@/components/providers/sidebar-provider";
+// import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
+// import {
+//   Tooltip,
+//   TooltipContent,
+//   TooltipProvider,
+//   TooltipTrigger,
+// } from "@/components/ui/tooltip";
+// import { DarkModeToggle } from "../DarkModeToggle";
 
 interface SidebarProps {
   course: any;
 }
 
 export function Sidebar({ course }: SidebarProps) {
-  const pathname = typeof window !== "undefined" ? window?.location?.pathname : "";
+  // const pathname = typeof window !== "undefined" ? window?.location?.pathname : "";
   
   // const { isOpen, toggle, close } = useSidebar();
   // const [openModules, setOpenModules] = useState<string[]>([]);
@@ -147,7 +147,7 @@ export function Sidebar({ course }: SidebarProps) {
   //   </div>
   // );
 
-  return (
+  return typeof window !== "undefined" && (
     <>
       {/* Thin Mobile Sidebar */}
       {/* <aside className="fixed inset-y-0 left-0 z-50 flex flex-col items-center w-[60px] border-r bg-background lg:hidden py-4 gap-y-4">

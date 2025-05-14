@@ -13,11 +13,9 @@ import {
   ChevronRight,
   PlayCircle,
   X,
-  Check,
 } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { usePathname } from "next/navigation";
 import { useSidebar } from "@/components/providers/sidebar-provider";
 import { JSXElementConstructor, ReactElement, ReactNode, ReactPortal, useEffect, useState } from "react";
 import {
@@ -33,7 +31,7 @@ interface SidebarProps {
 }
 
 export function Sidebar({ course }: SidebarProps) {
-  const pathname = usePathname();
+  const pathname = typeof window !== undefined ? window.location.pathname : "";
   
   const { isOpen, toggle, close } = useSidebar();
   const [openModules, setOpenModules] = useState<string[]>([]);

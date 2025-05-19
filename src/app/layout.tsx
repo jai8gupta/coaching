@@ -24,6 +24,18 @@ export default function RootLayout({
       <head>
       <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3975528961034908" crossOrigin="anonymous"></script>
       <meta name="google-site-verification" content="oHu1fiBxqSIipUJawcsibGx9TDvKiKiOT6F1KGXyUMs" />
+      <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17096238637">
+      </script>
+      <script dangerouslySetInnerHTML={{
+        __html: `
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', '${process.env.NEXT_PUBLIC_GTAG_ID}');
+                `
+      }}>
+      </script>
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

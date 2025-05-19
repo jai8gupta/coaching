@@ -25,13 +25,14 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { DarkModeToggle } from "../DarkModeToggle";
+import { usePathname } from "next/navigation";
 
 interface SidebarProps {
   course: any;
 }
 
 export function Sidebar({ course }: SidebarProps) {
-  const pathname = typeof window !== "undefined" ? window?.location?.pathname : "";
+  const pathname = usePathname();
   
   const { isOpen, toggle, close } = useSidebar();
   const [openModules, setOpenModules] = useState<string[]>([]);

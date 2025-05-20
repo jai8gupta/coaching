@@ -2,6 +2,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Analytics } from "@vercel/analytics/react"
+import { GoogleAnalytics } from '@next/third-parties/google'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,28 +27,7 @@ export default function RootLayout({
       <meta name="google-site-verification" content="oHu1fiBxqSIipUJawcsibGx9TDvKiKiOT6F1KGXyUMs" />
       <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17096238637">
       </script>
-      <>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-
-            gtag('config', '${process.env.NEXT_PUBLIC_GTAG_ID}');
-                  `
-        }}>
-        </script>
-        <script dangerouslySetInnerHTML={{
-          __html: `
-          gtag('event', 'conversion', {
-              'send_to': 'AW-17096238637/a7gGCJzFssoaEK3Mj9g_',
-              'value': 1.0,
-              'currency': 'INR'
-          });
-          `
-        }}>
-        </script>
-      </>
+      <GoogleAnalytics gaId="AW-17096238637" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
